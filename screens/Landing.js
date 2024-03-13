@@ -4,7 +4,7 @@ import { useSelector } from 'react-redux'
 import CourseItems from '../components/CourseItems';
 import EmptyMsg from '../components/EmptyMsg';
 
-export default function UserCouses() {
+export default function UserCouses({navigation}) {
   const state =useSelector(state=>state.courses.existingCourses);
   if(state.length){
     return (
@@ -16,7 +16,9 @@ export default function UserCouses() {
            image={item.image}
            title={item.title}
            price={item.price}
-           viewDetail={()=>alert('dtail')}
+           viewDetail={()=>navigation.navigate('Details',{
+            courseId:item.id
+           })}
            addToCard={()=>alert('pannier')}
           />)
         }
