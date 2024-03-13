@@ -1,11 +1,23 @@
-import { Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
+import { 
+    Image,
+    StyleSheet,
+    Text,
+    TouchableHighlight,
+    TouchableOpacity,
+    View } from 'react-native'
 import React from 'react'
 import { MaterialIcons } from '@expo/vector-icons';
 import GlobalStyle from '../styles/GlobalStyle'
 
 export default function CourseItems(props) {
   return (
-    <View style={styles.courseContainer}>
+    <TouchableHighlight
+        onPress={props.viewDetail}
+        underlayColor={GlobalStyle.green}
+    >
+            <View style={styles.courseContainer}>
+
+           
         <View style={styles.imageCOntainer}>
             <Image
                 source={{uri:props.image}}
@@ -28,8 +40,8 @@ export default function CourseItems(props) {
                 <MaterialIcons name="shopping-basket" size={35} color={GlobalStyle.green} />
             </TouchableOpacity>
         </View>
-      
-    </View>
+        </View>
+    </TouchableHighlight>
   )
 }
 
@@ -44,7 +56,10 @@ const styles = StyleSheet.create({
     },
     imageCOntainer:{
         width:"100%",
-        height:"60%"
+        height:"60%",
+        borderTopLeftRadius:10,
+        borderTopRightRadius:10,
+        overflow:'hidden'
     },
     image:{
         width:"100%",
