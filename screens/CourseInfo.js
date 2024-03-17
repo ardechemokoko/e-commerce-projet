@@ -1,7 +1,9 @@
-import { Image, ScrollView, StyleSheet, Text, View } from 'react-native'
+import { Image, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 import React, { useEffect } from 'react'
-import { UseSelector, useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import GlobalStyle from '../styles/GlobalStyle'
+import { MaterialIcons } from '@expo/vector-icons';
+import addToCart from '../redux/action/actionAddToCart';
 
 const CourseInfo = ({ navigation, route }) => {
   const courseId = route.params.courseId
@@ -12,6 +14,14 @@ const CourseInfo = ({ navigation, route }) => {
     })
 
   }, [navigation])
+  const dispatch = useDispatch();
+
+  const handleAddToCart = () =>{
+    dispatch(addToCart(selectedCourse));
+    navigation.goBack();
+
+  }
+
 
   return (
     <View>
@@ -31,11 +41,23 @@ const CourseInfo = ({ navigation, route }) => {
       </ScrollView>
       <View style={styles.footerContainer}>
         <View style={styles.footerTop}>
-          <View style={styles.coursePriceWrapper}>
-            <Text style={styles.coursePriceText}>{selectedCourse.price}</Text>
-          </View>
+            <Text style={styles.coursePriceText}>{selectedCourse.price} MAD</Text>
         </View>
-        <View style={styles.footerBottom}></View>
+        <View style={styles.footerBottom}>
+          <MaterialIcons 
+          name="chevron-left"
+           size={40} color={GlobalStyle.white}
+           onPress={()=>navigation.goBack()}
+            />
+          <TouchableOpacity 
+            onPress={handleAddToCart}
+          >
+            <View style={styles.addPanier}>
+               <Text style={styles.textAddPanier}>Ajouté au panier</Text>
+            </View>
+          </TouchableOpacity>
+        </View>
+
 
       </View>
     </View>
@@ -76,11 +98,25 @@ const styles = StyleSheet.create({
     padding:40,
   },
   coursePriceText:{
-    fontSize:24,
-    color:'red'
+    fontSize:20,
+    color:GlobalStyle.green,
+    paddingHorizontal:30
   },
   footerBottom:{
-    height:'60%'
+    height:'60%',
+    backgroundColor:GlobalStyle.green,
+    flexDirection:'row',
+    alignItems:'center',
+    justifyContent:'space-between',
+    paddingHorizontal:30
+  },
+  addPanier:{
+    backgroundColor:GlobalStyle.white,
+    borderRadius:25,
+    padding:12
+  },
+  textAddPanier:{
+    color:GlobalStyle.green
   }
 
 

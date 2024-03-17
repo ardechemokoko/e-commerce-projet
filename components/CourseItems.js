@@ -26,7 +26,7 @@ export default function CourseItems(props) {
         </View>
         <View style={styles.courseContainerDetails}>
             <Text  style={styles.courseTitle}>{props.title}</Text>
-            <Text  style={styles.coursePrice}>{props.price.toFixed(2)}</Text>
+            <Text  style={styles.coursePrice}>{props.price.toFixed(2)} MAD</Text>
         </View>
         <View style={styles.iconContainer}>
             <TouchableOpacity
